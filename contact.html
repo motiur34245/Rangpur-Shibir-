@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us</title>
+
+<style>
+
+body{
+margin:0;
+font-family:sans-serif;
+background:#050b1a;
+color:white;
+overflow:hidden;
+}
+
+/* THREE CANVAS */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* CONTENT */
+
+.container{
+padding:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:25px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+p{
+font-size:16px;
+line-height:1.7;
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:10px 18px;
+background:linear-gradient(45deg,#7c3aed,#06b6d4);
+border-radius:10px;
+color:white;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Contact Us</h1>
+
+<p>📧 Email: support@example.com</p>
+<p>💬 WhatsApp: +8801XXXXXXXXX</p>
+<p>✈ Telegram: @yourusername</p>
+
+<a href="index.html" class="btn">⬅ Back Home</a>
+
+</div>
+
+</div>
+
+<!-- THREE JS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const geometry = new THREE.PlaneGeometry(200,200,50,50);
+
+const material = new THREE.MeshBasicMaterial({
+color:0x00ffff,
+wireframe:true
+});
+
+const plane = new THREE.Mesh(geometry,material);
+scene.add(plane);
+
+plane.rotation.x = -1.2;
+
+camera.position.z = 80;
+
+let frame = 0;
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+frame += 0.05;
+
+const positions = plane.geometry.attributes.position;
+
+for(let i=0;i<positions.count;i++){
+
+const x = positions.getX(i);
+const y = positions.getY(i);
+
+const wave = Math.sin(x * 0.3 + frame) + Math.cos(y * 0.3 + frame);
+
+positions.setZ(i,wave * 2);
+
+}
+
+positions.needsUpdate = true;
+
+renderer.render(scene,camera);
+
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
