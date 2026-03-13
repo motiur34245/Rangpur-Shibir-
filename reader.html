@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>অধ্যায়ন করুন</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:sans-serif;
+display:flex;
+flex-direction:column;
+height:100vh;
+}
+
+.topbar{
+background:#1c7c3b;
+color:white;
+text-align:center;
+padding:10px;
+}
+
+.viewer{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#eee;
+}
+
+canvas{
+max-width:100%;
+}
+
+.page-control{
+background:#2a57c8;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+padding:10px;
+}
+
+.bottom-menu{
+background:#0b3fb3;
+display:flex;
+justify-content:space-around;
+padding:12px;
+color:white;
+font-size:22px;
+}
+
+.thumb-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+display:none;
+flex-direction:column;
+}
+
+.thumb-header{
+padding:10px;
+background:#eee;
+}
+
+.thumb-header input{
+width:100%;
+padding:10px;
+font-size:16px;
+}
+
+.thumb-grid{
+flex:1;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+padding:10px;
+overflow:auto;
+}
+
+.thumb-grid canvas{
+width:100%;
+border:2px solid #ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar"> (بِسْمِ ٱللَّٰهِ الرَّحْمَٰنِ الرَّحِيمِ)-Book Reader-- (رَبِّ زِدْنِي عِلْمًا)</div>
+
+<div class="viewer">
+<canvas id="pdf-render"></canvas>
+</div>
+
+<div class="page-control">
+
+<button onclick="prevPage()">‹</button>
+
+<span id="page-num"></span> /
+<span id="page-count"></span>
+
+<button onclick="nextPage()">›</button>
+
+</div>
+
+<div class="bottom-menu">
+
+<div>☰</div>
+
+<div onclick="openThumb()">🔎</div>
+
+<div>🔖</div>
+
+</div>
+
+<!-- Thumbnail Screen -->
+
+<div id="thumbScreen" class="thumb-screen">
+
+<div class="thumb-header">
+<input type="number" placeholder="পৃষ্ঠা নম্বর লিখুন" onkeypress="if(event.key==='Enter'){searchPage(this.value)}">
+</div>
+
+<div id="thumbGrid" class="thumb-grid"></div>
+
+</div>
+
+
+<script>
+
+const url = new URLSearchParams(window.location.search).get("file");
+
+let pdfDoc=null;
+let pageNum=1;
+let thumbsLoaded=false;
+
+const canvas=document.getElementById("pdf-render");
+const ctx=canvas.getContext("2d");
+
+function renderPage(num){
+
+pdfDoc.getPage(num).then(page=>{
+
+const viewport=page.getViewport({scale:1.5});
+
+canvas.height=viewport.height;
+canvas.width=viewport.width;
+
+page.render({
+canvasContext:ctx,
+viewport:viewport
+});
+
+document.getElementById("page-num").textContent=num;
+
+});
+
+}
+
+pdfjsLib.getDocument(url).promise.then(pdf=>{
+
+pdfDoc=pdf;
+
+document.getElementById("page-count").textContent=pdf.numPages;
+
+renderPage(pageNum);
+
+});
+
+function prevPage(){
+
+if(pageNum<=1)return;
+
+pageNum--;
+
+renderPage(pageNum);
+
+}
+
+function nextPage(){
+
+if(pageNum>=pdfDoc.numPages)return;
+
+pageNum++;
+
+renderPage(pageNum);
+
+}
+
+/* thumbnail screen */
+
+function openThumb(){
+
+document.getElementById("thumbScreen").style.display="flex";
+
+if(!thumbsLoaded){
+generateThumbs();
+thumbsLoaded=true;
+}
+
+}
+
+/* sequential thumbnail load */
+
+function generateThumbs(){
+
+const grid=document.getElementById("thumbGrid");
+
+let i=1;
+
+function loadThumb(){
+
+if(i>pdfDoc.numPages) return;
+
+const pageIndex=i;
+
+const c=document.createElement("canvas");
+
+grid.appendChild(c);
+
+pdfDoc.getPage(pageIndex).then(page=>{
+
+const viewport=page.getViewport({scale:0.3});
+
+c.width=viewport.width;
+c.height=viewport.height;
+
+page.render({
+canvasContext:c.getContext("2d"),
+viewport:viewport
+}).promise.then(()=>{
+
+i++;
+loadThumb();
+
+});
+
+});
+
+c.onclick=()=>{
+
+pageNum=pageIndex;
+
+renderPage(pageNum);
+
+document.getElementById("thumbScreen").style.display="none";
+
+};
+
+}
+
+loadThumb();
+
+}
+
+/* search page */
+
+function searchPage(val){
+
+if(val<1||val>pdfDoc.numPages)return;
+
+pageNum=parseInt(val);
+
+renderPage(pageNum);
+
+document.getElementById("thumbScreen").style.display="none";
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.6">
+<title>মাসিক পরিকল্পনা + দৈনিক কার্যক্রম + একনজরে মাসিক রিপোর্ট</title>
+
+<style>
+/* মাসিক পরিকল্পনার স্টাইল */
+body {
+    font-family: "Kalpurush", "Siyam Rupali", Arial, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 20px;
+
+}
+.page {
+    width: 950px;
+    margin: 0 auto 40px;
+    border: 2px solid #000;
+    padding: 20px;
+    background: white;
+}
+.center { text-align: center; }
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+.box {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+.row {
+    display: flex;
+    gap: 10px;
+}
+.col { width: 50%; }
+.title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.fill {
+    border: none;
+    border-bottom: 1px dotted #000;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 2px 4px;
+}
+.w60 { width: 60px; }
+.w80 { width: 80px; }
+.w100 { width: 100px; }
+.w120 { width: 120px; }
+.w150 { width: 150px; }
+.w200 { width: 200px; }
+.w100p { width: 100%; }
+.note {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #000;
+}
+.right { text-align: right; }
+
+/* দৈনিক + মাসিক রিপোর্ট স্টাইল */
+h2, h3 { text-align: center; margin: 20px 0; }
+.main {
+    border: 2px solid black;
+    padding: 15px;
+    background: white;
+    margin-top: 30px;
+    width: 950px;
+    margin-left: 100px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    border: 2.5px solid black;
+    margin-bottom: 25px;
+}
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    min-width: 60px;
+}
+thead th {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+tfoot td {
+    font-weight: bold;
+    background-color: #e8f4ff;
+}
+input[type="number"], input[type="text"] {
+    width: 100%;
+    height: 24px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+input[readonly] {
+    background: #f0f0f0;
+    font-weight: bold;
+    cursor: default;
+}
+.dot-input {
+    border: none;
+    border-bottom: 1px dotted black;
+    outline: none;
+    font-size: 13px;
+    width: 120px;
+}
+.dot-input.big { width: 250px; }
+.dot-input.small { width: 70px; }
+textarea {
+    width: 100%;
+    height: 100px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+}
+button {
+    display: block;
+    margin: 40px auto;
+    padding: 14px 50px;
+    font-size: 17px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div>
+<div style="text-align:center; margin-bottom:20px;">
+    <button onclick="duplicateForm()">➕ কপি করুন</button>
+    <button onclick="saveAll()">💾 সেভ করুন</button>
+</div>
+
+<div id="container" style="display:flex; gap:20px;">
+    <div class="form-block">
+
+<!-- ============================================= -->
+<!--               মাসিক পরিকল্পনা (শুধু ১টা)       -->
+<!-- ============================================= -->
+<div class="page">
+    <div class="center">
+        <div>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <h2>মাসিক পরিকল্পনা</h2>
+    </div>
+
+    <div class="top">
+        <div>মাসঃ <input class="fill w200"></div>
+        <div>সালঃ <input class="fill w200"></div>
+    </div>
+
+    <div class="row">
+        <div class="col box">
+            <div class="title">কুরআন অধ্যয়ন</div>
+            ● মোট দিন <input class="fill w60">
+            ● গড় আয়াত <input class="fill w60"><br>
+            ● সূরার নাম <input class="fill w100p"><br>
+            ● মুখস্থ : আয়াত <input class="fill w60">
+            ; অর্থসহ মুখস্থ <input class="fill w60"><br>
+            ● দারস প্রস্তুত <input class="fill w80">
+        </div>
+
+        <div class="col box">
+            <div class="title">হাদিস অধ্যয়ন</div>
+            ● মোট দিন <input class="fill w60">
+            ● গড় হাদিস <input class="fill w60"><br>
+            ● গ্রন্থ/বিষয় <input class="fill w100p"><br>
+            ● মুখস্থ <input class="fill w60">
+            ; বিষয় <input class="fill w60"><br>
+            ● দারস প্রস্তুত <input class="fill w80">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col box">
+            <div class="title">সাহিত্য অধ্যয়ন</div>
+            ● মোট পৃষ্ঠা <input class="fill w60">
+            ইসলামী <input class="fill w60">
+            অন্যান্য <input class="fill w60"><br>
+            ● বইয়ের নাম <input class="fill w100p"><br>
+            ● বই নোট <input class="fill w120">
+            আলোচনা নোট <input class="fill w120">
+        </div>
+
+        <div class="col box">
+            <div class="title">পাঠ্যপুস্তক অধ্যয়ন</div>
+            ● মোট দিন <input class="fill w60">
+            গড় ঘন্টা <input class="fill w60"><br>
+            ● ক্লাস উপস্থিতি :
+            মোট <input class="fill w60">
+            উপস্থিতি <input class="fill w60"><br><br>
+
+            <div class="title">নামাজ</div>
+            ● প্রতি ওয়াক্ত নামাজ জামাতে আদায় করা হবে ইনশাআল্লাহ<br>
+            ● কিছু নফল নামাজ/ইবাদত আদায় করা হবে ইনশাআল্লাহ
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col box">
+            <div class="title">যোগাযোগ</div>
+            সদস্য <input class="fill w60">
+            সাথী <input class="fill w60">
+            কর্মী <input class="fill w60"><br>
+            সমর্থক <input class="fill w60">
+            বন্ধু <input class="fill w60">
+            শুভাকাঙ্ক্ষী <input class="fill w60"><br>
+            স্কুল ছাত্র <input class="fill w60">
+            মেধাবী ছাত্র <input class="fill w60">
+            শিক্ষক <input class="fill w60"><br>
+            মুহাররামা <input class="fill w60">
+            ভিআইপি <input class="fill w60">
+        </div>
+
+        <div class="col box">
+            <div class="title">সাংগঠনিক দায়িত্ব পালন</div>
+            ● মোট দিন <input class="fill w60">
+            গড় ঘন্টা <input class="fill w60"><br><br>
+
+            <table>
+                <tr>
+                    <td>দাওয়াতি কাজ<br><br></td>
+                    <td>অন্যান্য সাংগঠনিক কাজ<br><br></td>
+                </tr>
+                <tr>
+                    <td>
+                        দিন <input class="fill w60">
+                        গড় ঘন্টা <input class="fill w60">
+                    </td>
+                    <td>
+                        দিন <input class="fill w60">
+                        গড় ঘন্টা <input class="fill w60">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="title">বিতরণ</div>
+        <table>
+            <tr>
+                <td>ইসলামী সাহিত্য <input class="fill w60"></td>
+                <td>ছাত্রসংবাদ <input class="fill w60"></td>
+                <td>ক্লাস রুটিন <input class="fill w60"></td>
+            </tr>
+            <tr>
+                <td>কিশোর পত্রিকা <input class="fill w60"></td>
+                <td>ইংরেজি পত্রিকা <input class="fill w60"></td>
+                <td>স্টিকার/কার্ড <input class="fill w60"></td>
+            </tr>
+            <tr>
+                <td>Y.W. <input class="fill w60"></td>
+                <td>পরিচিতি <input class="fill w60"></td>
+                <td>উপহার/মেসেজ/ই-মেইল <input class="fill w60"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="box">
+        <div class="title">দায়িত্বশীলের পরামর্শ ও মন্তব্য</div>
+        <textarea class="note"></textarea>
+    </div>
+
+    <div class="right">
+        পরিকল্পনা গ্রহণকারীর<br>
+        স্বাক্ষর ও তারিখ
+    </div>
+</div>
+
+<!-- ============================================= -->
+<!--              দৈনিক কার্যক্রম + রিপোর্ট           -->
+<!-- ============================================= -->
+<h2>১–৩১ তারিখ পর্যন্ত দৈনিক কার্যক্রম ফর্ম</h2>
+
+<table>
+<thead>
+<tr>
+    <th rowspan="2">ক্রমিক</th>
+    <th colspan="1">কুরআন অধ্যায়ন</th>
+    <th colspan="1">হাদিস অধ্যায়ন</th>
+    <th colspan="2">সাহিত্য অধ্যায়ন</th>
+    <th colspan="1">পাঠ্যপুস্তক অধ্যায়ন</th>
+    <th colspan="1">ক্লাস সংখ্যা উপস্থিতি</th>
+    <th colspan="2">নামাজ</th>
+    <th colspan="4">যোগাযোগ</th>
+    <th colspan="4">যোগাযোগ</th>
+    <th colspan="4">বিতরণ</th>
+    <th colspan="2">সাংগঠনিক দায়িত্ব পালন (ঘন্টা)</th>
+    <th rowspan="2">পত্রিকা</th>
+    <th rowspan="2">শরীর চর্চা</th>
+    <th rowspan="2">আত্মা সমালোচনা</th>
+</tr>
+
+<tr>
+    <th>সূরা আয়াত</th>
+    <th>সংখ্যা</th>
+    <th>ইসলামী</th>
+    <th>অন্যান্য</th>
+    <th>ঘন্টা</th>
+    <th>দিন</th>
+    <th>জামায়াত</th>
+    <th>কাজা</th>
+    <th>সদস্য</th>
+    <th>সাথী</th>
+    <th>কর্মী</th>
+    <th>সমর্থক</th>
+    <th>বন্ধু</th>
+    <th>মেধাবী ছাত্র</th>
+    <th>শুভাকাঙ্ক্ষী</th>
+    <th>মুহাররমা</th>
+    <th>সাহিত্য</th>
+    <th>ম্যাগাজিন</th>
+    <th>স্টিকার/কার্ড</th>
+    <th>উপহার</th>
+    <th>দাওয়াতি কাজ</th>
+    <th>অন্যান্য সাংগঠনিক কাজ</th>
+</tr>
+</thead>
+
+<tbody id="dailyTableBody"></tbody>
+
+<tfoot>
+<tr id="totalRow">
+    <td><strong>মোট</strong></td>
+</tr>
+</tfoot>
+</table>
+
+<button onclick="calculateAndFillMonthly()">মাসিক রিপোর্টে অটো ফিল করুন</button>
+
+<div class="main">
+
+<h3>বিসমিল্লাহির রাহমানির রাহীম </h3>
+<h2>একনজরে মাসিক রিপোর্ট</h2>
+
+<table>
+<tr>
+<td class="no-border">মাসঃ <input class="dot-input big"></td>
+<td class="no-border" style="text-align:right">সালঃ <input class="dot-input big"></td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td width="50%">
+<b>কুরআন অধ্যয়ন</b><br>
+● মোট দিন <input class="dot-input" id="quran_total_days" readonly> ● গড় আয়াত <input class="dot-input" id="quran_avg_ayat" readonly><br>
+● সূরার নাম <input class="dot-input big"><br>
+● মুখস্থঃ আয়াত <input class="dot-input"> অর্থসহ সূরা <input class="dot-input">
+</td>
+
+<td width="50%">
+<b>হাদিস অধ্যয়ন</b><br>
+● মোট দিন <input class="dot-input" id="hadith_total_days" readonly> ● গড় হাদিস <input class="dot-input" id="hadith_avg" readonly><br>
+● গ্রন্থ/বিষয় <input class="dot-input big"><br>
+● মুখস্থ <input class="dot-input"> ; বিষয় <input class="dot-input">
+</td>
+</tr>
+
+<tr>
+<td>
+<b>সাহিত্য অধ্যয়ন</b><br>
+● মোট পৃষ্ঠা <input class="dot-input" id="sahitya_total" readonly> ইসলামী <input class="dot-input" id="islami_page" readonly> অন্যান্য <input class="dot-input" id="other_page" readonly><br>
+● বইয়ের নাম <input class="dot-input big"><br>
+● বই নোট <input class="dot-input"> আলোচনা নোট <input class="dot-input">
+</td>
+
+<td>
+<b>পাঠ্যপুস্তক অধ্যয়ন</b><br>
+● মোট দিন <input class="dot-input" id="pathyo_total_days" readonly> গড় ঘন্টা <input class="dot-input" id="pathyo_avg_hour" readonly><br>
+ক্লাসে উপস্থিতি: মোট ক্লাস <input class="dot-input small"> উপস্থিতি <input class="dot-input small" id="class_present_total" readonly><br>
+<b>নামাজ</b><br>
+● জামায়াত <input class="dot-input" id="jamat_total" readonly> ওয়াক্ত<input class="dot-input" id="jamat_avg" readonly> গড় <input class="dot-input"><br>
+● কাজা <input class="dot-input" id="kaja_total" readonly> ওয়াক্ত
+</td>
+</tr>
+
+<tr>
+<td>
+<b>যোগাযোগ</b><br>
+সদস্য <input class="dot-input small" id="yogajog_sodoshy" readonly> সাথী <input class="dot-input small" id="yogajog_sathi" readonly> কর্মী <input class="dot-input small" id="yogajog_kormi" readonly><br>
+সমর্থক <input class="dot-input small" id="yogajog_somorthok" readonly> বন্ধু <input class="dot-input small" id="yogajog_bondhu" readonly> শুভাকাঙ্ক্ষী <input class="dot-input small" id="yogajog_shubhakankhi" readonly><br>
+স্কুল ছাত্র <input class="dot-input small"> মেধাবী ছাত্র <input class="dot-input small" id="yogajog_medhabi" readonly> শিক্ষক <input class="dot-input small"><br>
+মুহাররমা <input class="dot-input small" id="yogajog_muharrama" readonly> ভিআইপি <input class="dot-input small">
+</td>
+
+<td>
+<b>সাংগঠনিক দায়িত্বপালন</b><br>
+দিন <input class="dot-input small" id="sangothonik_total_din" readonly> গড় ঘন্টা <input class="dot-input" id="sangothonik_avg_hour" readonly><br><br>
+দাওয়াতি কাজ<br>
+দিন <input class="dot-input small" id="dawati_din" readonly> গড় ঘন্টা <input class="dot-input" id="dawati_avg_hour" readonly><br><br>
+অন্যান্য সাংগঠনিক কাজ<br>
+দিন <input class="dot-input small" id="onno_sangothonik_din" readonly> গড় ঘন্টা <input class="dot-input" id="onno_sangothonik_avg_hour" readonly>
+</td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr><th colspan="4">বিতরণ</th></tr>
+<tr>
+<td>ইসলামী সাহিত্য <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+<td>ক্লাস রুটিন <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+<tr>
+<td>কিশোর পত্রিকা <input class="dot-input small"></td>
+<td>ইংরেজি পত্রিকা <input class="dot-input small"></td>
+<td>স্টিকার/কার্ড <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+<tr>
+<td>Y.W. <input class="dot-input small"></td>
+<td>পরিচিতি <input class="dot-input small"></td>
+<td>উপহার/মেসেজ/ই-মেইল <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr><th colspan="4">বৃদ্ধি</th></tr>
+<tr>
+<td>সদস্য <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+<td>কর্মী <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+<tr>
+<td>সদস্যপ্রার্থী <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+<td>সমর্থক <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+<tr>
+<td>সাথী <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+<td>বন্ধু <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+<tr>
+<td>সাথীপ্রার্থী <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+<td>শুভাকাঙ্ক্ষী <input class="dot-input small"></td>
+<td><input class="dot-input small"></td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr><th colspan="4">রাষ্ট্রীয়নালয়</th></tr>
+<tr>
+<td>পরিষদের তহবিল <input class="dot-input small"> টাকা</td>
+<td>ব্যক্তিগত বৃদ্ধি <input class="dot-input small"> টাকা</td>
+<td>মোট বৃদ্ধি <input class="dot-input small"> টাকা</td>
+<td></td>
+</tr>
+<tr>
+<td>ছাত্রকল্যাণ <input class="dot-input small"> টাকা</td>
+<td>টেবিল ব্যাংক <input class="dot-input small"> টাকা</td>
+<td>কলম/খাতা <input class="dot-input small"> টি</td>
+<td></td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>বিবিধ</th></tr>
+<tr>
+<td>
+● আত্মসমালোচনা <input class="dot-input small" id="bibidh_atmosomolochona" readonly> দিন ● শরীরচর্চা <input class="dot-input small" id="bibidh_shorirchorcha" readonly> দিন ● পত্রিকা পাঠ <input class="dot-input small" id="bibidh_potrika_path" readonly> দিন<br>
+● আত্মউন্নয়ন (কুরআন) যোগাযোগ <input class="dot-input small"> জন ● গ্রুপ দাওয়াতি কাজ <input class="dot-input small"> বার ● দাওয়াতি মেসেজ প্রেরণ <input class="dot-input small"> টি<br>
+● দাওয়াতি ই-মেইল প্রেরণ <input class="dot-input small"> টি ● অনুসরণ বন্ধু যোগাযোগ <input class="dot-input small"> জন ● বন্ধু সংগঠনের সাথে যোগাযোগ <input class="dot-input small"> জন<br>
+● দক্ষতা উন্নয়ন কার্যক্রম: কম্পিউটার শিক্ষা <input class="dot-input small"> দিন ● ভাষা শিক্ষা <input class="dot-input small"> দিন ● অন্যান্য <input class="dot-input"><br>
+● নিয়ম অনুযায়ী দায়িত্বশীলকে রিপোর্ট দেয়া হয়েছে <input class="dot-input small"> বার ; তারিখ <input class="dot-input">
+</td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>দায়িত্বশীলের পরামর্শ ও স্বাক্ষর</th></tr>
+<tr><td><textarea></textarea></td></tr>
+</table>
+
+<br>
+<div style="text-align:right">স্বাক্ষর ও তারিখ</div>
+
+</div>
+</div>
+
+<script>
+// দৈনিক টেবিল তৈরি
+const tbody = document.getElementById("dailyTableBody");
+const totalRow = document.getElementById("totalRow");
+
+const columnCount = 25;
+
+for(let day = 1; day <= 31; day++) {
+    let row = "<tr>";
+    row += `<td>${day}</td>`;
+    for(let i = 0; i < columnCount; i++) {
+        row += `<td><input type="number" min="0" value=""></td>`;
+    }
+    row += "</tr>";
+    tbody.innerHTML += row;
+}
+
+// মোট রো তৈরি
+let totalCells = `<td><strong>মোট</strong></td>`;
+for(let i = 0; i < columnCount; i++) {
+    totalCells += `<td>0</td>`;
+}
+totalRow.innerHTML = totalCells;
+
+// টোটাল ক্যালকুলেশন
+function updateTotals() {
+    const totals = new Array(columnCount).fill(0);
+    const rows = tbody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input[type="number"]');
+        inputs.forEach((input, index) => {
+            totals[index] += Number(input.value) || 0;
+        });
+    });
+
+    const totalCells = totalRow.querySelectorAll('td:not(:first-child)');
+    totalCells.forEach((cell, index) => {
+        cell.textContent = totals[index];
+    });
+}
+
+tbody.addEventListener('input', updateTotals);
+tbody.addEventListener('input', calculateAndFillMonthly);
+
+// মাসিক অটো ফিল
+function calculateAndFillMonthly() {
+    const totals = new Array(columnCount).fill(0);
+    const rows = tbody.querySelectorAll('tr');
+    
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input[type="number"]');
+        inputs.forEach((input, index) => {
+            totals[index] += Number(input.value) || 0;
+        });
+    });
+
+    // কুরআন
+    let quranDays = 0;
+    let quranSum = 0;
+    rows.forEach(row => {
+        const ayat = Number(row.querySelector('td:nth-child(2) input')?.value || 0);
+        if (ayat > 0) {
+            quranDays++;
+            quranSum += ayat;
+        }
+    });
+    document.getElementById("quran_total_days").value = quranDays;
+    document.getElementById("quran_avg_ayat").value = quranDays > 0 ? (quranSum / quranDays).toFixed(1) : '0';
+
+    // হাদিস
+    let hadithDays = 0;
+    let hadithSum = 0;
+    rows.forEach(row => {
+        const hadith = Number(row.querySelector('td:nth-child(3) input')?.value || 0);
+        if (hadith > 0) {
+            hadithDays++;
+            hadithSum += hadith;
+        }
+    });
+    document.getElementById("hadith_total_days").value = hadithDays;
+    document.getElementById("hadith_avg").value = hadithDays > 0 ? (hadithSum / hadithDays).toFixed(1) : '0';
+
+    // পাঠ্যপুস্তক
+    let pathyoDays = 0;
+    let pathyoSum = 0;
+    rows.forEach(row => {
+        const hour = Number(row.querySelector('td:nth-child(6) input')?.value || 0);
+        if (hour > 0) {
+            pathyoDays++;
+            pathyoSum += hour;
+        }
+    });
+    document.getElementById("pathyo_total_days").value = pathyoDays;
+    document.getElementById("pathyo_avg_hour").value = pathyoDays > 0 ? (pathyoSum / pathyoDays).toFixed(1) : '0';
+
+// ===== জামায়াত (মোট + গড়) =====
+let jamatSum = 0;
+let jamatDays = 0;
+
+rows.forEach(row => {
+    const val = Number(row.querySelector('td:nth-child(8) input')?.value || 0);
+    if (val > 0) {
+        jamatSum += val;
+        jamatDays++;
+    }
+});
+
+document.getElementById("jamat_total").value = jamatSum;
+
+// গড় ওয়াক্ত (প্রতিদিন)
+document.getElementById("jamat_avg").value =
+    jamatDays > 0 ? (jamatSum / jamatDays).toFixed(1) : "0";
+
+    // যোগাযোগ ফিল্ডগুলো
+    document.getElementById("yogajog_sodoshy").value = totals[8];
+    document.getElementById("yogajog_sathi").value = totals[9];
+    document.getElementById("yogajog_kormi").value = totals[10];
+    document.getElementById("yogajog_somorthok").value = totals[11];
+    document.getElementById("yogajog_bondhu").value = totals[12];
+    document.getElementById("yogajog_medhabi").value = totals[13];
+    document.getElementById("yogajog_muharrama").value = totals[15];
+    document.getElementById("yogajog_shubhakankhi").value = totals[14];
+
+    // বিবিধ
+    document.getElementById("bibidh_potrika_path").value = totals[22];
+    document.getElementById("bibidh_shorirchorcha").value = totals[23];
+    document.getElementById("bibidh_atmosomolochona").value = totals[24];
+
+    // সাহিত্য পৃষ্ঠা
+    document.getElementById("islami_page").value = totals[2];
+    document.getElementById("other_page").value = totals[3];
+    document.getElementById("sahitya_total").value = totals[2] + totals[3];
+
+    // ক্লাস উপস্থিতি
+    document.getElementById("class_present_total").value = totals[5];
+
+// ===== দাওয়াতি কাজ =====
+let dawatiDays = 0;
+let dawatiSum = 0;
+
+// ===== অন্যান্য সাংগঠনিক কাজ =====
+let onnoDays = 0;
+let onnoSum = 0;
+
+rows.forEach(row => {
+    const inputs = row.querySelectorAll('input[type="number"]');
+
+    // দাওয়াতি কাজ (কলাম ২১)
+    const dawati = Number(inputs[20].value || 0);
+    if (dawati > 0) {
+        dawatiDays++;
+        dawatiSum += dawati;
+    }
+
+    // অন্যান্য সাংগঠনিক কাজ (কলাম ২২)
+    const onno = Number(inputs[21].value || 0);
+    if (onno > 0) {
+        onnoDays++;
+        onnoSum += onno;
+    }
+});
+
+// একনজরে রিপোর্টে বসানো
+document.getElementById("dawati_din").value = dawatiDays;
+document.getElementById("dawati_avg_hour").value =
+    dawatiDays > 0 ? (dawatiSum / dawatiDays).toFixed(1) : "0";
+
+document.getElementById("onno_sangothonik_din").value = onnoDays;
+document.getElementById("onno_sangothonik_avg_hour").value =
+    onnoDays > 0 ? (onnoSum / onnoDays).toFixed(1) : "0";
+
+// ===== সাংগঠনিক দায়িত্ব পালন (Final হিসাব) =====
+
+// দিনও গড় হবে
+let sangDays = 0;
+if (dawatiDays > 0 && onnoDays > 0) {
+    sangDays = (dawatiDays + onnoDays) / 2;
+} else if (dawatiDays > 0) {
+    sangDays = dawatiDays;
+} else if (onnoDays > 0) {
+    sangDays = onnoDays;
+}
+
+// গড় ঘন্টা আগের মতোই
+let sangAvg = 0;
+if (dawatiDays > 0 && onnoDays > 0) {
+    sangAvg = ((dawatiSum / dawatiDays) + (onnoSum / onnoDays)) / 2;
+} else if (dawatiDays > 0) {
+    sangAvg = dawatiSum / dawatiDays;
+} else if (onnoDays > 0) {
+    sangAvg = onnoSum / onnoDays;
+}
+
+// একনজরে রিপোর্টে বসানো
+document.getElementById("sangothonik_total_din").value = sangDays.toFixed(1);
+document.getElementById("sangothonik_avg_hour").value = sangAvg.toFixed(1);
+
+    
+}
+</script>
+
+<script>
+function duplicateForm(){
+    const container = document.getElementById("container");
+    const first = container.querySelector(".form-block");
+
+    // ফর্ম কপি
+    const clone = first.cloneNode(true);
+
+    // 🔥 সব input / textarea ফাঁকা করা
+    clone.querySelectorAll("input").forEach(input => {
+        if (input.type === "checkbox" || input.type === "radio") {
+            input.checked = false;
+        } else {
+            input.value = "";
+        }
+    });
+
+    clone.querySelectorAll("textarea").forEach(textarea => {
+        textarea.value = "";
+    });
+
+    // 🔥 readonly ইনপুটও ফাঁকা
+    clone.querySelectorAll("input[readonly]").forEach(input => {
+        input.value = "";
+    });
+
+    container.appendChild(clone);
+}
+</script>
+<script>
+// ================== MIN / MAX RULES ==================
+const columnMinMax = {
+    0:  { min: 0, max: 3600 }, // কুরআন আয়াত
+    1:  { min: 0, max: 400 }, // হাদিস
+    2:  { min: 0, max: 700 }, // ইসলামী সাহিত্য
+    3:  { min: 0, max: 900 }, // অন্যান্য সাহিত্য
+    4:  { min: 0, max: 12 }, // পাঠ্যপুস্তক ঘন্টা
+    5:  { min: 0, max: 1 },  // ক্লাস উপস্থিতি
+    6:  { min: 0, max: 5 },  // জামায়াত
+    7:  { min: 0, max: 5 },  // কাজা
+    8:  { min: 0, max: 50 }, // সদস্য
+    9:  { min: 0, max: 100 }, // সাথী
+    10: { min: 0, max: 210 }, // কর্মী
+    11: { min: 0, max: 310 }, // সমর্থক
+    12: { min: 0, max: 710 }, // বন্ধু
+    13: { min: 0, max: 200 },  // মেধাবী ছাত্র
+    14: { min: 0, max: 100},  // শুভাকাঙ্ক্ষী
+    15: { min: 0, max: 100 },  // মুহাররমা
+    16: { min: 0, max: 800 }, // সাহিত্য বিতরণ
+    17: { min: 0, max: 900 }, // ম্যাগাজিন
+    18: { min: 0, max: 700 }, // স্টিকার
+    19: { min: 0, max: 600 }, // উপহার
+    20: { min: 0, max: 10 },  // দাওয়াতি কাজ
+    21: { min: 0, max: 10 },  // অন্যান্য সাংগঠনিক
+    22: { min: 0, max: 1 },  // পত্রিকা (হ্যাঁ/না)
+    23: { min: 0, max: 1 },  // শরীরচর্চা
+    24: { min: 0, max: 1 }   // আত্মসমালোচনা
+};
+
+// ================== APPLY RULES ==================
+function applyMinMaxToDailyTable(){
+    const rows = document.querySelectorAll("#dailyTableBody tr");
+
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll("input[type='number']");
+        inputs.forEach((input, index) => {
+            const rule = columnMinMax[index];
+            if(!rule) return;
+
+            input.min = rule.min;
+            input.max = rule.max;
+
+            input.addEventListener("input", () => {
+                if(input.value === "") return;
+
+                let val = Number(input.value);
+
+                if(val > rule.max) input.value = rule.max;
+                if(val < rule.min) input.value = rule.min;
+            });
+        });
+    });
+}
+
+// ================== RUN AFTER TABLE CREATED ==================
+applyMinMaxToDailyTable();
+
+// ===== দাওয়াতি কাজ (দিন + গড় ঘন্টা) =====
+let dawatiHourSum = 0;
+let dawatiDays = 0;
+
+rows.forEach(row => {
+    const inputs = row.querySelectorAll('input[type="number"]');
+    const hour = Number(inputs[20]?.value || 0);
+
+    if (hour > 0) {
+        dawatiHourSum += hour;
+        dawatiDays++;
+    }
+});
+
+document.getElementById("dawati_din").value = dawatiDays;
+document.getElementById("dawati_avg_hour").value =
+    dawatiDays > 0 ? (dawatiHourSum / dawatiDays).toFixed(1) : "0";
+
+
+// ===== অন্যান্য সাংগঠনিক কাজ (দিন + গড় ঘন্টা) =====
+let onnoHourSum = 0;
+let onnoDays = 0;
+
+rows.forEach(row => {
+    const inputs = row.querySelectorAll('input[type="number"]');
+    const hour = Number(inputs[21]?.value || 0);
+
+    if (hour > 0) {
+        onnoHourSum += hour;
+        onnoDays++;
+    }
+});
+
+document.getElementById("onno_sangothonik_din").value = onnoDays;
+document.getElementById("onno_sangothonik_avg_hour").value =
+    onnoDays > 0 ? (onnoHourSum / onnoDays).toFixed(1) : "0";
+
+
+
+
+<!-- আগের সব কোড অপরিবর্তিত থাকবে -->
+
+<!-- ফায়ারবেস SDK লোড (আগের মতোই রাখা আছে) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+// ফায়ারবেস ইনিশিয়ালাইজ — শুধুমাত্র একবার
+const firebaseConfig = {
+  apiKey: "AIzaSyDr80feC88bjFeKZTyYxrHWb_qbv2_p6y4",
+  authDomain: "report0.firebaseapp.com",
+  projectId: "report0",
+  storageBucket: "report0.appspot.com",
+  messagingSenderId: "748101940576",
+  appId: "1:748101940576:web:49a05379ef2d1a64eb1a05"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// সেভ ফাংশন — আরও ভালো করে ডাটা সংগ্রহ করা হলো
+function saveAll() {
+    // সব ফর্ম-ব্লক থেকে ডাটা নেবে (যদি একাধিক কপি থাকে)
+    const allForms = document.querySelectorAll('.form-block');
+    const reports = [];
+
+    allForms.forEach((formBlock, formIndex) => {
+        const data = {
+            formIndex: formIndex,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            monthlyPlan: {},
+            dailyActivities: [],
+            monthlyReport: {}
+        };
+
+        // মাসিক পরিকল্পনা অংশ
+        const monthlyPage = formBlock.querySelector('.page');
+        if (monthlyPage) {
+            const inputs = monthlyPage.querySelectorAll('input, textarea');
+            inputs.forEach(el => {
+                if (el.name) {
+                    data.monthlyPlan[el.name] = el.value;
+                }
+            });
+        }
+
+        // দৈনিক টেবিল (যদি থাকে)
+        const dailyTable = formBlock.querySelector('#dailyTableBody');
+        if (dailyTable) {
+            const rows = dailyTable.querySelectorAll('tr');
+            rows.forEach(row => {
+                const dayData = [];
+                const inputs = row.querySelectorAll('input[type="number"]');
+                inputs.forEach(input => dayData.push(input.value || 0));
+                data.dailyActivities.push(dayData);
+            });
+        }
+
+        // একনজরে মাসিক রিপোর্ট
+        const monthlySummary = formBlock.querySelector('.main');
+        if (monthlySummary) {
+            const inputs = monthlySummary.querySelectorAll('input, textarea');
+            inputs.forEach(el => {
+                if (el.id) {
+                    data.monthlyReport[el.id] = el.value;
+                } else if (el.placeholder || el.previousElementSibling?.textContent) {
+                    const key = el.previousElementSibling?.textContent.trim() || `field_${Math.random().toString(36).slice(2,7)}`;
+                    data.monthlyReport[key] = el.value;
+                }
+            });
+        }
+
+        reports.push(data);
+    });
+
+    if (reports.length === 0) {
+        alert("কোনো ডাটা পাওয়া যায়নি!");
+        return;
+    }
+
+    // একাধিক ফর্ম থাকলে সবগুলো সেভ করবে, নইলে শুধু একটা
+    const promises = reports.map(report => 
+        db.collection("monthlyReports").add(report)
+    );
+
+    Promise.all(promises)
+        .then(() => {
+            alert(`✅ ${reports.length} টি রিপোর্ট সফলভাবে সেভ হয়েছে!`);
+        })
+        .catch(err => {
+            alert("❌ সেভ করতে সমস্যা হয়েছে");
+            console.error("Firestore Error:", err);
+        });
+}
+
+
+</script>
+<script>
+const FORM_KEY = "monthly_form_backup_v1";
+
+// সব input/textarea সেভ
+function saveForm() {
+    const data = {};
+    document.querySelectorAll("input, textarea").forEach(el => {
+        if (el.id) {
+            data[el.id] = el.value;
+        }
+    });
+    localStorage.setItem(FORM_KEY, JSON.stringify(data));
+}
+
+// সব input/textarea লোড
+function loadForm() {
+    const saved = localStorage.getItem(FORM_KEY);
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    Object.keys(data).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = data[id];
+    });
+}
+
+// টাইপ করলেই অটো সেভ
+document.addEventListener("input", saveForm);
+
+// পেজ খুললেই লোড
+window.addEventListener("load", loadForm);
+</script>
+<script>
+// ================= AUTO ID GENERATOR =================
+(function autoGenerateIDs() {
+    let inputCount = 0;
+    let textareaCount = 0;
+
+    document.querySelectorAll("input").forEach(el => {
+        if (!el.id) {
+            inputCount++;
+            el.id = "auto_input_" + inputCount;
+        }
+    });
+
+    document.querySelectorAll("textarea").forEach(el => {
+        if (!el.id) {
+            textareaCount++;
+            el.id = "auto_textarea_" + textareaCount;
+        }
+    });
+
+    console.log("✅ Auto ID generated:", inputCount, "inputs,", textareaCount, "textareas");
+})();
+</script>
+
+<script>
+
+</body>
+</html>
