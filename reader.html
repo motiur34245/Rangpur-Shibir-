@@ -280,6 +280,82 @@ document.getElementById("thumbScreen").style.display="none";
 
 }
 
+
+
+/* check pdf load error */
+
+setTimeout(()=>{
+
+if(!pdfDoc){
+
+document.querySelector(".viewer").innerHTML = `
+<div style="
+text-align:center;
+font-size:20px;
+color:red;
+padding:20px;
+">
+⚠️ দুঃখিত! এই PDF ফাইলটি পাওয়া যায়নি বা লোড করা যাচ্ছে না।
+</div>
+`;
+
+}
+
+},1500);
+
+/* loading percentage system */
+
+let loadingBox=document.createElement("div");
+loadingBox.style.position="fixed";
+loadingBox.style.top="0";
+loadingBox.style.left="0";
+loadingBox.style.width="100%";
+loadingBox.style.height="100%";
+loadingBox.style.background="white";
+loadingBox.style.display="flex";
+loadingBox.style.flexDirection="column";
+loadingBox.style.justifyContent="center";
+loadingBox.style.alignItems="center";
+loadingBox.style.fontSize="22px";
+loadingBox.style.zIndex="9999";
+
+loadingBox.innerHTML=`
+<div>PDF Loading...</div>
+<div id="loadPercent">0%</div>
+`;
+
+document.body.appendChild(loadingBox);
+
+
+/* monitor loading */
+
+let loadingTask = pdfjsLib.getDocument({
+url:url,
+onProgress:function(progress){
+
+if(progress && progress.total){
+let percent=Math.round((progress.loaded/progress.total)*100);
+document.getElementById("loadPercent").innerText=percent+"%";
+}
+
+}
+});
+
+loadingTask.promise.then(function(pdf){
+
+loadingBox.style.display="none";
+
+}).catch(function(){
+
+loadingBox.innerHTML=`
+<div style="color:red;font-size:20px;text-align:center">
+⚠️ দুঃখিত! এই PDF ফাইলটি পাওয়া যায়নি বা লোড করা যাচ্ছে না।
+</div>
+`;
+
+});
+
+
 </script>
 </body>
 </html>
