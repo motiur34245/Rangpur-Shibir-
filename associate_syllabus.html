@@ -906,5 +906,100 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const elements = document.querySelectorAll("h2, ul, b");
+
+  elements.forEach(function(el){
+
+    // প্রথমে hidden থাকবে
+    el.style.opacity = "0";
+    el.style.transform = "translateY(40px)";
+    el.style.transition = "all 0.8s ease";
+
+  });
+
+  function revealOnScroll(){
+
+    const triggerBottom = window.innerHeight * 0.85;
+
+    elements.forEach(function(el){
+
+      const boxTop = el.getBoundingClientRect().top;
+
+      if(boxTop < triggerBottom){
+
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+
+      }
+
+    });
+
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+
+  revealOnScroll();
+
+});
+
+</script>
+
+  <script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  // CSS animation JS দিয়ে যোগ করা
+  const style = document.createElement("style");
+  style.innerHTML = `
+  .pdfHighlight{
+    background: linear-gradient(90deg, yellow 0%, yellow 0%);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 1s ease;
+    padding:2px 4px;
+    border-radius:3px;
+  }
+  .pdfHighlight.active{
+    background-size:100% 100%;
+  }`;
+  document.head.appendChild(style);
+
+  const pdfLinks = document.querySelectorAll('a[href*="reader.html?file="]');
+
+  // class যোগ
+  pdfLinks.forEach(function(link){
+    link.classList.add("pdfHighlight");
+  });
+
+  function animatePDF(){
+
+    const trigger = window.innerHeight * 0.85;
+
+    pdfLinks.forEach(function(link){
+
+      const pos = link.getBoundingClientRect().top;
+
+      if(pos < trigger && pos > 0){
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active"); // বাইরে গেলে আবার reset হবে
+      }
+
+    });
+
+  }
+
+  window.addEventListener("scroll", animatePDF);
+
+  animatePDF();
+
+});
+
+  </script>
+
 </body>
 </html>
