@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদেরকে অনুদান দিন</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .donate-section {
+            padding: 4rem 5%;
+            text-align: center;
+            min-height: 80vh;
+        }
+        .donate-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .donate-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .donate-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            background-color: var(--white-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .donation-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .donation-options button {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .donation-options button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .donate-button {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .payment-methods {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .bKash-info {
+            background-color: #f0f8ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .bKash-info span {
+            font-weight: bold;
+            color: #e2136e;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="donate-section">
+    <h1>আমাদেরকে অনুদান দিন</h1>
+    <p>আপনার অনুদান আমাদের স্বেচ্ছাসেবামূলক কার্যক্রমকে এগিয়ে নিতে সাহায্য করবে।</p>
+
+    <div class="donate-form">
+        <form id="donationForm">
+
+            <div class="form-group">
+                <label>আপনার নাম</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>আপনার ইমেইল</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>অনুদান পরিমাণ</label>
+
+                <div class="donation-options">
+                    <button type="button" data-amount="100">৳১০০</button>
+                    <button type="button" data-amount="500">৳৫০০</button>
+                    <button type="button" data-amount="1000">৳১০০০</button>
+                    <button type="button" data-amount="2000">৳২০০০</button>
+                </div>
+
+                <input type="number" id="customAmount" placeholder="যেমন: ৫০০০">
+            </div>
+
+            <div class="payment-methods">
+                <h3>পেমেন্ট পদ্ধতি নির্বাচন করুন</h3>
+                <div class="bKash-info">
+                    <p>সেন্ড মানি করুন বিকাশ নম্বর: <span>01306368405</span></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>ট্রানজেকশন আইডি</label>
+                <input type="text" id="transactionId" required>
+            </div>
+
+            <button type="submit" class="donate-button">অনুদান জমা দিন</button>
+        </form>
+    </div>
+</section>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// 🔴 Firebase config বসাও
+const firebaseConfig = {
+  apiKey: "AIzaSyDi1R_E662VnaSZwbTQCT_eYhmDVDOkL9M",
+  authDomain: "online-bazaar-bd.firebaseapp.com",
+  projectId: "online-bazaar-bd",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// amount button
+const buttons = document.querySelectorAll(".donation-options button");
+const amountInput = document.getElementById("customAmount");
+
+buttons.forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    buttons.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    amountInput.value = btn.dataset.amount;
+  });
+});
+
+// submit
+document.getElementById("donationForm").addEventListener("submit", async(e)=>{
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const amount = amountInput.value;
+  const transactionId = document.getElementById("transactionId").value;
+
+  try{
+    await addDoc(collection(db,"donations"),{
+      name,email,amount,transactionId,date:new Date()
+    });
+
+    alert("✅ অনুদান সফল হয়েছে!");
+
+    e.target.reset();
+  }catch(err){
+    alert("❌ Error: "+err);
+  }
+});
+
+</script>
+
+</body>
+</html>
