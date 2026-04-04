@@ -1,818 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>বাংলাদেশ ইসলামি ছাত্রশিবির রংপুর জেলা</title>
-
-<style>
-
-body{
-background:#050b1a;
-color:white;
-font-family:sans-serif;
-padding:15px;
-margin:0;
-}
-
-/* HEADER */
-
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 0;
-}
-
-.menu-btn{
-font-size:28px;
-cursor:pointer;
-}
-
-/* SIDE MENU */
-
-.side-menu{
-position:fixed;
-top:0;
-right:-260px;
-width:260px;
-height:100%;
-background:#0f172a;
-transition:0.3s;
-z-index:999;
-padding-top:60px;
-}
-
-.side-menu a{
-display:block;
-padding:15px 20px;
-color:white;
-text-decoration:none;
-border-bottom:1px solid #1e293b;
-}
-
-.side-menu a:hover{
-background:#1e293b;
-}
-
-/* CLOSE BUTTON */
-
-.close-btn{
-position:absolute;
-top:15px;
-left:15px;
-font-size:26px;
-cursor:pointer;
-}
-
-/* SLIDER */
-
-.slider{
-position:relative;
-width:100%;
-height:180px;
-border-radius:20px;
-overflow:hidden;
-}
-
-.slide{
-display:none;
-}
-
-.slide img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:20px;
-}
-
-/* DOTS */
-
-.dots{
-text-align:center;
-margin-top:10px;
-}
-
-.dot{
-height:8px;
-width:8px;
-margin:0 4px;
-background:#666;
-border-radius:50%;
-display:inline-block;
-cursor:pointer;
-}
-
-.active{
-background:#3b82f6;
-}
-
-/* SOCIAL */
-
-.stats{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.stat{
-flex:1;
-background:#0f172a;
-padding:12px;
-border-radius:12px;
-text-align:center;
-font-size:14px;
-}
-
-.stat img{
-width:20px;
-vertical-align:middle;
-margin-right:6px;
-}
-
-.stats a{
-text-decoration:none;
-color:white;
-}
-
-/* GAME GRID */
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-top:20px;
-}
-
-.grid a{
-text-decoration:none;
-color:white;
-}
-
-.card{
-height:140px;
-border-radius:18px;
-padding:15px;
-font-weight:bold;
-font-size:16px;
-}
-
-.card1{
-background:linear-gradient(135deg,#7c3aed,#a855f7);
-}
-
-.card2{
-background:linear-gradient(135deg,#06b6d4,#0891b2);
-}
-
-.card3{
-background:linear-gradient(135deg,#f43f5e,#ec4899);
-}
-
-.card4{
-background:linear-gradient(135deg,#fb923c,#f97316);
-}
-
-
-
-
-/* FOOTER */
-
-.footer{
-margin-top:40px;
-padding:25px;
-background:black;
-color:white;
-}
-
-.footer h2{
-margin-top:20px;
-}
-
-.social{
-display:flex;
-gap:15px;
-margin:15px 0;
-}
-
-.social img{
-width:35px;
-height:35px;
-border-radius:50%;
-background:#111;
-padding:8px;
-}
-
-.copy{
-text-align:center;
-margin-top:15px;
-color:#aaa;
-}
-
-
-#typing{
-font-size:28px;
-font-weight:bold;
-text-align:center;
-margin:15px 0;
-letter-spacing:2px;
-}
-
-#typing span{
-
-animation: glow 1.5s infinite alternate;
-
-}
-
-/* Glow Animation */
-
-@keyframes glow{
-
-0%{
-text-shadow:0 0 5px currentColor,
-            0 0 10px currentColor;
-}
-
-100%{
-text-shadow:0 0 10px currentColor,
-            0 0 20px currentColor,
-            0 0 30px currentColor;
-}
-
-}
-
-
-/* RGB Animated Border (no class change) */
-
-.card{
-position:relative;
-border-radius:18px;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-padding:3px;            /* border thickness */
-border-radius:18px;
-
-background:linear-gradient(
-90deg,
-red,
-orange,
-yellow,
-lime,
-cyan,
-blue,
-purple,
-red
-);
-
-background-size:300% 300%;
-animation:rgbBorder 4s linear infinite;
-
-/* show only border area */
--webkit-mask:
-linear-gradient(#000 0 0) content-box,
-linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-
-pointer-events:none;
-}
-
-@keyframes rgbBorder{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.info-section{
-margin-top:30px;
-line-height:1.7;
-}
-
-.info-box{
-background:#0f172a;
-padding:18px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.info-box h3{
-margin-top:0;
-color:#38bdf8;
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশ ইসলামি ছাত্রশিবির রংপুর জেলা </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="একতা বন্ধন স্বেচ্ছাসেবী সংগঠন" class="header-logo">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="btn-home">🏠 হোম</a></li>
+                <li><a href="report.html" class="btn-activities">📌 রিপোর্ট</a></li>
+                <li><a href="membership_form/index.html" class="btn-members">👥 সদস্যপদ</a></li>
+                <li><a href="donate.html" class="btn-donate">💰 অনুদান</a></li>
+                <li><a href="emergency.html" class="btn-emergency">🚨 জরুরি</a></li>
+                <li><a href="contact.html" class="btn-contact">📞 যোগাযোগ</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
 
-<!-- HEADER -->
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slide">
+                <img src="aplus_unushthan.png" alt="প্রথম স্লাইড" class="slide-image">
+                <div class="slide-caption">
+                    <h2>মেধাবী ছাত্রদের এ+ সংবর্ধনা</h2>
+                    <p>এসএসসি পরীক্ষার্থীদের তাৎক্ষণিক সংবর্ধনা দেয় ইসলামি ছাত্রশিবির রংপুর জেলা </p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="nobinboron.png" alt="দ্বিতীয় স্লাইড" class="slide-image">
+                <div class="slide-caption">
+                    <h2>নবীন বরণ অনুষ্ঠান</h2>
+                    <p>শিক্ষার্থীদের নতুন উদ্যমে গাইডমুলক আলোচনা করেন বাংলাদেশ ইসলামি ছাত্রশিবির রংপুর জেলা </p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="July_sonod.png" alt="তৃতীয় স্লাইড" class="slide-image">
+                <div class="slide-caption">
+                    <h2>জুলাই গনহত্যার বিচারের দাবি </h2>
+                    <p>জুলাই গনহত্যার বিচারের দাবি নিয়ে মাঠে নামেন বাংলাদেশ ইসলামি ছাত্রশিবির </p>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-slide">❮</button>
+            <button class="next-slide">❯</button>
+        </div>
+    </div>
 
-<div class="header">
-
-<h2 id="typing"></h2>
-
-<div class="menu-btn" onclick="openMenu()">☰</div>
-
-</div>
-
-<!-- SIDE MENU -->
-
-<div id="menu" class="side-menu">
-
-<div class="close-btn" onclick="closeMenu()">×</div>
-
-<a href="index.html">🏠 Home</a>
-<a href="about.html">📄 About Us</a>
-<a href="contact.html">📞 Contact Us</a>
-
-</div>
-
-<!-- IMAGE SLIDER -->
-
-<div class="slider">
-
-<div class="slide">
-<img src="rangpur_shibir.png">
-</div>
-
-<div class="slide">
-<img src="rangpur_sovapoti.png">
-</div>
-
-<div class="slide">
-<img src="potistabarshiki.jpg">
-</div>
-
-</div>
-
-<div class="dots">
-<span class="dot" onclick="currentSlide(1)"></span>
-<span class="dot" onclick="currentSlide(2)"></span>
-<span class="dot" onclick="currentSlide(3)"></span>
-</div>
-
-<!-- SOCIAL LINKS -->
-
-<div class="stats">
-
-<a href="https://facebook.com/" target="_blank" class="stat">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-Facebook
-</a>
-
-<a href="https://wa.me/8801XXXXXXXXX" target="_blank" class="stat">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-WhatsApp
-</a>
-
-<a href="https://t.me/yourusername" target="_blank" class="stat">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
-Telegram
-</a>
-
-</div>
-
-<!-- GAME BOX -->
-
-<div class="grid">
-
-<a href="activist_syllabus.html">
-<div class="card card1">
-কর্মী সিলেবাস 
-</div>
-</a>
-
-<a href="associate_syllabus.html">
-<div class="card card2">
-সাথী সিলেবাস 
-</div>
-</a>
-
-<a href="member.html">
-<div class="card card3">
-সদস্য সিলেবাস 
-</div>
-</a>
-
-<a href="report.html">
-<div class="card card4">
-অনলাইন রিপোর্ট লিখুন
-</div>
-</a>
-
-</div>
-
-<div class="info-section">
-
-<div class="info-box">
-<h3>আমাদের লক্ষ্য</h3>
-<p>
-আল্লাহ প্রদত্ত রাসুল (স) এর প্রদর্শিত বিধান অনুযায়ী মানুষের সার্বিক জীবনের পুনর্বিন্যাস সাধন করে আল্লাহর সন্তোষ অর্জন। 
-</p>
-</div>
-
-<div class="info-box">
-<h3>আমাদের কার্যক্রম</h3>
-<p>
-শিক্ষা কার্যক্রম, দাওয়াহ কার্যক্রম, সমাজসেবা এবং বিভিন্ন প্রশিক্ষণ কার্যক্রম পরিচালনা করা হয়।
-</p>
-</div>
-
-<div class="info-box">
-<h3>যোগাযোগ</h3>
-<p>
-যেকোনো তথ্য বা সহযোগিতার জন্য আমাদের সাথে যোগাযোগ করতে পারেন।
-</p>
-</div>
-
-<div class="info-section"><div class="info-box">
-<h3>Islamic Knowledge</h3>
-<p>
-Bangladesh Islami Chhatra Shibir Rangpur District works to help students gain proper Islamic knowledge and understanding. 
-The organization encourages students to study the Qur'an, Hadith, and Islamic history so they can live their lives according to Islamic principles. 
-Through study circles, discussions, and educational programs, students learn the values of honesty, discipline, and responsibility. 
-The goal is to build a generation that understands Islam deeply and practices it in daily life.
-</p>
-</div><div class="info-box">
-<h3>Character Building</h3>
-<p>
-One of the main goals of the organization is to develop strong character among students. 
-Students are guided to become honest, responsible, respectful, and disciplined individuals. 
-They are taught to avoid harmful habits and instead follow moral values. 
-By focusing on personal development, the organization aims to create students who are trustworthy and respected in society.
-</p>
-</div><div class="info-box">
-<h3>Academic Excellence</h3>
-<p>
-Bangladesh Islami Chhatra Shibir encourages students to focus on their studies and achieve academic success. 
-The organization supports students in improving their learning skills, time management, and study habits. 
-Students are motivated to become intelligent and knowledgeable individuals who can contribute positively to the nation. 
-Education is considered a key tool for building a better future.
-</p>
-</div><div class="info-box">
-<h3>Leadership Development</h3>
-<p>
-The organization works to develop leadership qualities among students. 
-Through different activities, training sessions, and teamwork, students learn how to lead with responsibility and integrity. 
-They are encouraged to take initiative, solve problems, and work for the betterment of society. 
-This helps prepare young people to become future leaders.
-</p>
-</div><div class="info-box">
-<h3>Social Responsibility</h3>
-<p>
-Students are encouraged to become responsible members of society. 
-The organization promotes helping the poor, supporting community development, and working for social welfare. 
-Members participate in volunteer activities and community services. 
-This helps them understand the importance of caring for others and contributing to society.
-</p>
-</div><div class="info-box">
-<h3>Patriotism</h3>
-<p>
-Bangladesh Islami Chhatra Shibir teaches students to love and respect their country. 
-Students are encouraged to become responsible citizens who work for the development and prosperity of Bangladesh. 
-The organization promotes values such as unity, justice, and dedication to the nation. 
-Young people are motivated to contribute positively to their country.
-</p>
-</div><div class="info-box">
-<h3>Positive Youth Development</h3>
-<p>
-The organization focuses on building a positive and productive youth generation. 
-Students are guided to use their time and abilities in meaningful activities. 
-They are encouraged to stay away from harmful influences and instead work for knowledge, morality, and social development. 
-The aim is to build a generation that is strong in faith, knowledge, and character.
-</p>
-</div></div>
-<div class="info-box">
-<h3>Moral Values</h3>
-<p>
-Bangladesh Islami Chhatra Shibir encourages students to follow strong moral values in their daily lives. 
-Students are taught the importance of honesty, respect, patience, and kindness. 
-By following Islamic moral principles, students can become good individuals who positively influence society. 
-The organization believes that a strong moral foundation is essential for building a better community.
-</p>
-</div><div class="info-box">
-<h3>Discipline and Responsibility</h3>
-<p>
-Discipline is an important part of student life. 
-The organization guides students to manage their time properly, respect rules, and take responsibility for their actions. 
-Through different programs and activities, students learn how discipline helps them succeed in both education and personal life.
-</p>
-</div><div class="info-box">
-<h3>Unity and Brotherhood</h3>
-<p>
-Bangladesh Islami Chhatra Shibir promotes unity and brotherhood among students. 
-Members are encouraged to help each other, work together, and build strong friendships based on Islamic values. 
-This spirit of unity helps create a positive environment where students can grow together.
-</p>
-</div><div class="info-box">
-<h3>Community Service</h3>
-<p>
-Students are encouraged to participate in community service and social welfare activities. 
-Helping people in need, supporting social initiatives, and participating in volunteer work are important parts of the organization's mission. 
-These activities help students develop compassion and responsibility toward society.
-</p>
-</div><div class="info-box">
-<h3>Spiritual Development</h3>
-<p>
-The organization encourages students to strengthen their spiritual connection with Allah. 
-Through regular prayers, Quran study, and Islamic discussions, students learn to live a balanced life guided by faith. 
-Spiritual development helps students stay motivated and focused on good deeds.
-</p>
-</div><div class="info-box">
-<h3>Education and Research</h3>
-<p>
-Students are motivated to develop curiosity and interest in learning and research. 
-The organization supports educational discussions, book reading, and intellectual development. 
-By gaining knowledge and understanding different subjects, students can become capable contributors to society.
-</p>
-</div><div class="info-box">
-<h3>Future Nation Builders</h3>
-<p>
-The ultimate goal of Bangladesh Islami Chhatra Shibir is to build a generation of responsible, educated, and morally strong individuals. 
-Students are encouraged to use their talents and knowledge to serve the nation. 
-By focusing on character, knowledge, and leadership, the organization aims to create future leaders who will contribute to the progress of Bangladesh.
-</p>
-</div></div>
-
+  <div class="date-time-container">
+    <div class="date-time-top-layer">
+        <span id="bangla-date-time"></span>
+        <span id="english-date-time"></span>
+    </div>
+    <div class="date-time-bottom-layer">
+        <p id="scrolling-text">বাংলাদেশ ইসলামী ছাত্রশিবির, রংপুর জেলা শাখার পক্ষ থেকে আপনাকে আন্তরিক স্বাগতম।
+আমরা ছাত্রদের মাঝে ইসলামী জ্ঞান বৃদ্ধি, মেধা ও নেতৃত্বের বিকাশ এবং মহানবী (সা.)-এর আদর্শ অনুসরণে কাজ করি।
+আসুন, আমরা একসাথে জ্ঞান, নৈতিকতা ও আদর্শের ভিত্তিতে একটি সুন্দর সমাজ গড়ি।</p>
+    </div>
 </div>
 
 
-<!-- FOOTER -->
-
-<div class="footer">
-
-<h2>Need Help?</h2>
-
-<p>📞01933932475</p>
-<p>✉ motiur34245@gmail.com@gmail.com</p>
-<p>📍 টেপামধুপুর কাউনিয়া রংপুর</p>
-
-<h2>Get in Touch</h2>
-
-<div class="social">
-
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
-
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
-
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
-
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-
-</div>
-
-<h2>Related Page</h2>
-
-<p>Terms & Condition</p>
-<p>Returns & Replacement Policy</p>
-
-<hr>
-
-<p class="copy">© 2026 Your Brand. All Rights Reserved</p>
-
-</div>
-<script>
-
-/* MENU */
-
-function openMenu(){
-document.getElementById("menu").style.right="0";
-}
-
-function closeMenu(){
-document.getElementById("menu").style.right="-260px";
-}
-
-/* SLIDER */
-
-let slideIndex=0;
-
-showSlides();
-
-function showSlides(){
-
-let slides=document.getElementsByClassName("slide");
-let dots=document.getElementsByClassName("dot");
-
-for(let i=0;i<slides.length;i++){
-slides[i].style.display="none";
-}
-
-slideIndex++;
-
-if(slideIndex>slides.length){
-slideIndex=1;
-}
-
-for(let i=0;i<dots.length;i++){
-dots[i].classList.remove("active");
-}
-
-slides[slideIndex-1].style.display="block";
-dots[slideIndex-1].classList.add("active");
-
-setTimeout(showSlides,3000);
-
-}
-
-function currentSlide(n){
-
-slideIndex=n-1;
-showSlides();
-
-}
-
-</script>
-<script>
-
-const text = "ছাত্রশিবির রংপুর জেলা";
-
-const colors = [
-"#ff3b3b",
-"#ff9800",
-"#00e676",
-"#00e5ff",
-"#7c4dff",
-"#ff00ff"
-];
-
-let index = 0;
-
-function typeEffect(){
-
-if(index < text.length){
-
-let color = colors[Math.floor(Math.random()*colors.length)];
-
-document.getElementById("typing").innerHTML +=
-"<span style='color:"+color+"'>" + text[index] + "</span>";
-
-index++;
-
-setTimeout(typeEffect,120);
-
-}else{
-
-setTimeout(()=>{
-document.getElementById("typing").innerHTML="";
-index=0;
-typeEffect();
-},2000);
-
-}
-
-}
-
-typeEffect();
-
-</script>
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-let boxes = document.querySelectorAll(".info-box");
-
-/* style apply automatically */
-
-boxes.forEach(box=>{
-box.style.opacity="0";
-box.style.transform="translateY(80px)";
-box.style.transition="all 0.8s ease";
-});
-
-/* scroll animation */
-
-function animateBoxes(){
-
-let windowHeight = window.innerHeight;
-
-boxes.forEach(box=>{
-
-let position = box.getBoundingClientRect().top;
-
-if(position < windowHeight - 100){
-
-box.style.opacity="1";
-box.style.transform="translateY(0)";
-
-}
-
-});
-
-}
-
-window.addEventListener("scroll", animateBoxes);
-
-animateBoxes();
-
-});
-
-</script>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-const boxes = document.querySelectorAll(".info-box");
-
-/* initial style JS দিয়ে */
-
-boxes.forEach((box,i)=>{
-box.style.opacity = "0";
-box.style.transform = "translateX(-80px)";
-box.style.transition = "transform 0.7s cubic-bezier(.2,.65,.3,1), opacity 0.7s";
-});
-
-/* professional scroll observer */
-
-const observer = new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.style.opacity = "1";
-entry.target.style.transform = "translateX(0)";
-
-}else{
-
-/* আবার scroll করলে animation repeat হবে */
-
-entry.target.style.opacity = "0";
-entry.target.style.transform = "translateX(-80px)";
-
-}
-
-});
-
-},{
-threshold:0.2
-});
-
-boxes.forEach(box=>{
-observer.observe(box);
-});
-
-});
-
-</script>
-
-
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-let slider = document.querySelector(".slider");
-let images = document.querySelectorAll(".slide img");
-
-function fixSlider(){
-
-let screenWidth = window.innerWidth;
-
-let newHeight;
-
-/* PC */
-if(screenWidth > 1000){
-newHeight = 420;
-}
-
-/* Tablet */
-else if(screenWidth > 600){
-newHeight = 300;
-}
-
-/* Mobile */
-else{
-newHeight = 180;
-}
-
-slider.style.height = newHeight + "px";
-
-images.forEach(img=>{
-img.style.height = newHeight + "px";
-img.style.objectFit = "cover";
-});
-
-}
-
-fixSlider();
-
-window.addEventListener("resize", fixSlider);
-
-});
-
-</script>
-
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>ইসলামি ছাত্রশিবির এর সমর্থক হোন</h1>
+            <p>আমাদের সাথে যোগ দিন এবং একটি উন্নত সমাজ গঠনে অংশ নিন।</p>
+            <a href="donate.html" class="cta-button">অনুদান দিন</a>
+            <a href="somorthok.html" class="cta-button"> সমর্থক ফরম</a>
+        </div>
+    </section>
+
+    <section class="landing-action-buttons">
+        <div class="action-buttons">
+            <a href="activist_syllabus.html" class="action-button red"><i class="fas fa-book-open"></i><span>কর্মী সিলেবাস </span></a>
+            <a href="associate_syllabus.html" class="action-button blue"><i class="fas fa-handshake"></i><span>সাথী সিলেবাস</span></a>
+            <a href="member.html" class="action-button gold"><i class="fas fa-user-group"></i><span>সদস্য সিলেবাস </span></a>
+            <a href="report.html" class="action-button green"><i class="fas fa-file-alt"></i><span>অনলাইন রিপোর্ট </span></a>
+       <!--     <a href="membership_form/search.html" class="action-button orange"><i class="fas fa-graduation-cap"></i><span>আপনার তথ্য দেখুন</span></a> -->
+         <!--   <a href="#activities" class="action-button purple"><i class="fas fa-tasks"></i><span>কার্যক্রম</span></a> -->
+            <a href="https://live6.bmd.gov.bd/bn/" class="action-button pink"><i class="fas fa-cloud-sun-rain"></i><span>আবহাওয়া</span></a>
+      <!--      <a href="rules.html" class="action-button teal"><i class="fas fa-book"></i><span>নিয়মনীতি</span></a>  -->
+            <a href="https://www.prothomalo.com/collection/live" class="action-button yellow"><i class="fas fa-newspaper"></i><span>লাইভ নিউজ</span></a>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-heading-box">
+            <h2>আমাদের কাজের কিছু মুহূর্ত নিম্নে দেওয়া হলো</h2>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="aplus_unushthan.png" alt="ছবি 1">
+                <p class="gallery-caption">জিপিএ ৫ প্রাপ্ত শিক্ষার্থীদের এ+ সংবর্ধনা </p>
+            </div>
+            <div class="gallery-item">
+                <img src="iftar_mahfil.png" alt="ছবি 2">
+                <p class="gallery-caption">ইফতার মাহফিল ২০২৬</p>
+            </div>
+            <div class="gallery-item">
+                <img src="nobinboron.png" alt="ছবি 3">
+                <p class="gallery-caption">নবীন বরণ অনুষ্ঠান ২০২৬</p>
+            </div>
+            <div class="gallery-item">
+                <img src="16_December.png" alt="ছবি 4">
+                <p class="gallery-caption">১৬ ই ডিসেম্বর উৎযাপন ২০২৫</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="features-section">
+        <h2>আমাদের প্রধান কার্যক্রম</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>সাহায্য বিতরণ</h3>
+                <p>আমরা নিয়মিত অভাবী মানুষের মাঝে সাহায্য বিতরণ করি।</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-tree"></i>
+                <h3>পরিবেশ সুরক্ষা</h3>
+                <p>পরিবেশ রক্ষা এবং বৃক্ষরোপণ আমাদের অন্যতম প্রধান লক্ষ্য।</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>শিক্ষা সহায়তা</h3>
+                <p>দরিদ্র শিক্ষার্থীদের শিক্ষা সামগ্রী ও আর্থিক সহযোগিতা প্রদান করি।</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="members-section">
+        <h2 class="main-title">বাংলাদেশ ইসলামি ছাত্রশিবির রংপুর জেলার দায়িত্বশীলবৃন্দ</h2>
+        <div class="container">
+            <div class="card">
+                <img src="harun.png" alt="জেলা সভাপতি ">
+                <div class="name">মো:হামিদুল ইসলাম </div>
+                <div class="role">জেলা সভাপতি </div>
+             <!--   <div class="info">বিশেষজ্ঞ স্বেচ্ছাসেবক</div> -->
+                <div class="mobile">📞 01******</div>
+                <div class="quote">আদর্শ, শৃঙ্খলা ও আত্মত্যাগের মাধ্যমে আমরা একটি ন্যায়ভিত্তিক সমাজ গড়ার প্রত্যয়ে এগিয়ে চলেছি</div>
+            </div>
+            <div class="card">
+                <img src="nal.png" alt="জেলা সেক্রেটারি">
+                <div class="name">মোঃ হানিফুর রহমান স্বাধীন</div>
+                <div class="role">জেলা সেক্রেটারি </div>
+        <!--        <div class="info">সমাজকল্যাণ বিশেষজ্ঞ<br>সমাজিক অধিকার নিয়ে </div> -->
+                <div class="mobile">📞 017******</div>
+                <div class="quote">সমাজের উন্নতি চাইলেই আমাদের সবাইকে একসাথে কাজ করতে হবে। একসাথে এগিয়ে চলাই আমাদের সাফল্যের মূল চাবিকাঠি।</div>
+            </div>
+            <div class="card">
+                <img src="sazzad.png" alt="কেয়ারটেকার">
+                <div class="name">মোঃ অনিক ইকবাল</div>
+           <!--     <div class="role">অর্থ উপদেষ্টা</div> -->
+                <div class="info">হিসাব রক্ষণাবেক্ষণ ও তহবিল পরিচালনা<br>স্বচ্ছতা ও দায়বদ্ধতা নিশ্চিত করে</div>
+                <div class="mobile">📞 017*******</div>
+                <div class="quote">স্বচ্ছতা ও দায়বদ্ধতা ছাড়া কোনো কাজ দীর্ঘস্থায়ী হতে পারে না। সংগঠনের ভবিষ্যৎ নির্ভর করবে এই নীতির উপর।</div>
+            </div>
+            <div class="card">
+                <img src="alamin.png" alt="সাধারণ সম্পাদক">
+                <div class="name">মোঃ***** </div>
+                <div class="role">সাধারণ সম্পাদক</div>
+        <!--        <div class="info">সংগঠনের দৈনন্দিন কার্যক্রম পরিচালনা<br>সদস্যদের সাথে সমন্বয় সাধন</div> -->
+                <div class="mobile">📞 016*******</div>
+                <div class="quote">সদস্যদের ঐক্য ও সমন্বয়েই সংগঠনের সাফল্য নিহিত। সক্রিয় অংশগ্রহণের মাধ্যমেই লক্ষ্য অর্জিত হবে।</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+    <div class="container">
+        <h2>যোগাযোগ করুন</h2>
+        <p>আপনার যে কোনো প্রশ্ন বা পরামর্শের জন্য আমাদের সাথে যোগাযোগ করুন</p>
+        
+        <div class="contact-content">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>ঠিকানা</h4>
+                    <p>*******, °°°°°°°°°°°******বাংলাদেশ</p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>ফোন</h4>
+                    <p>01*********</p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-envelope"></i>
+                    <h4>ইমেইল</h4>
+                    <p>********--</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="নাম" required>
+                <input type="email" placeholder="ইমেইল" required>
+                <textarea placeholder="আপনার বার্তা" rows="5" required></textarea>
+                <button type="submit">পাঠান</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>আমাদের সম্পর্কে</h3>
+                <p>আমরা বাংলাদেশ ইসলামী ছাত্রশিবির, রংপুর জেলা শাখা—একটি আদর্শভিত্তিক ছাত্র সংগঠন, যার মূল লক্ষ্য ছাত্রদের মাঝে ইসলামী জ্ঞান বৃদ্ধি, নৈতিকতা গঠন এবং সঠিক জীবনদর্শনের চর্চা নিশ্চিত করা। আমরা বিশ্বাস করি, জ্ঞান ও চরিত্রের সমন্বয়েই একজন আদর্শ মানুষ গড়ে ওঠে।
+আমাদের কার্যক্রমের প্রধান দিক হলো ছাত্রদের মেধার বিকাশ ঘটানো এবং তাদের প্রতিভাকে সঠিকভাবে লালন করা। আমরা শিক্ষার্থীদের একাডেমিক উন্নতির পাশাপাশি নৈতিক ও চারিত্রিক উৎকর্ষ সাধনে গুরুত্ব দিয়ে থাকি, যাতে তারা নিজেদের জীবনকে অর্থবহ ও সফল করে তুলতে পারে।
+আমরা মহানবী হযরত মুহাম্মদ (সা.)-এর আদর্শ জীবন অনুসরণকে সর্বোচ্চ গুরুত্ব দেই। তাঁর জীবনাদর্শই আমাদের জন্য উত্তম পথনির্দেশনা। আমরা চাই, ছাত্ররা তাঁর দেখানো পথে চলার মাধ্যমে নিজেদের জীবনকে সুন্দর ও পরিপূর্ণ করে তুলুক।
+একই সাথে আমরা ছাত্রদের সকল বৈধ প্রয়োজন পূরণে সহযোগিতা করার চেষ্টা করি—চাই তা শিক্ষা, নৈতিক দিকনির্দেশনা বা সামাজিক সহায়তা হোক। আমাদের লক্ষ্য হলো এমন একটি প্রজন্ম গড়ে তোলা, যারা জ্ঞান, চরিত্র ও নেতৃত্বে হবে অনন্য।
+আমরা বিশ্বাস করি, এই প্রক্রিয়ার মাধ্যমে একদিন বিশ্বব্যাপী ইসলামি আদর্শে অনুপ্রাণিত নেতৃত্ব সৃষ্টি সম্ভব হবে। আসুন, আমরা সবাই একসাথে এই মহান লক্ষ্য অর্জনে এগিয়ে যাই।</p>
+            </div>
+            <div class="footer-links">
+                <h3>দ্রুত লিংক</h3>
+                <ul>
+                    <li><a href="#">হোম</a></li>
+                    <li><a href="privacy.html">প্রাইভেসি</a></li>
+                    <li><a href="contact.html">যোগাযোগ</a></li>
+                    <li><a href="#">সেবা</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>সামাজিক যোগাযোগ</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-developer">
+                <img src="najmul.png" alt="Developer Photo">
+                <h4>Md Motiur Rahman </h4>
+                <p>Frontend Web Developer</p>
+                <a href="mailto: motiur34245@gmail.com"><i class="fas fa-envelope"></i> ইমেইল করুন</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৬ বাংলাদেশ ইসলামি ছাত্রশিবির রংপুর জেলা ❤️</p>
+        </div>
+    </footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+
+
+    <script src="app.js"></script>
 </body>
             </html>
