@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>সমর্থক ফরম</title>
+
+<style>
+body{
+    font-family: "Siyam Rupali", sans-serif;
+    background:#f5f5f5;
+    padding:20px;
+}
+.container{
+    width:800px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border:1px solid #000;
+}
+h2,h3{
+    text-align:center;
+    margin:5px;
+}
+.row{
+    margin:10px 0;
+}
+input, textarea{
+    border:none;
+    border-bottom:1px dotted #000;
+    outline:none;
+    padding:5px;
+}
+textarea{
+    width:100%;
+}
+button{
+    padding:10px 20px;
+    margin-top:20px;
+}
+.error{
+    color:red;
+    font-size:14px;
+}
+
+.motiur{
+   margin-left: 300px;
+
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h3>
+    <h2>বাংলাদেশ ইসলামী ছাত্রশিবির</h2>
+    <h3>সমর্থক ফরম</h3>
+
+    <div class="row">
+        আমি <input id="nameTop" required> বিশ্বাস করি যে, ইসলামই আল্লাহর মনোনীত একমাত্র দ্বীন বা জীবনব্যবস্থা এবং এর অনুসরণের মধ্যেই মানবজীবনের ইহকালীন কল্যাণ ও পরকালীন মুক্তি নিহিত রয়েছে। 
+এ উদ্দেশ্যে বাংলাদেশ ইসলামী ছাত্রশিবির যে কর্মসূচি গ্রহণ করেছে, আমি তার সাথে সচেতনভাবে একমত হয়ে এ সংগঠনকে সমর্থন করছি।
+    </div>
+
+    <div class="row">
+        স্বাক্ষর: <input id="signTop" required>
+        তারিখ: <input type="date" id="dateTop" required>
+    </div>
+
+    <h3>ব্যক্তিগত তথ্য</h3>
+
+    <div class="row">নাম: <input id="name" required></div>
+
+    <div class="row">
+        পিতার নাম: <input id="father" required>
+        মাতার নাম: <input id="mother" required>
+    </div>
+
+    <div class="row">
+        শ্রেণি: <input id="className" required>
+        বিভাগ: <input id="group" required>
+        ক্রমিক নম্বর: <input id="roll" required>
+    </div>
+
+    <div class="row">
+        শিক্ষাপ্রতিষ্ঠান: <input id="school" style="width:400px" required>
+    </div>
+
+    <div class="row">
+        ধর্ম: <input id="religion" required>
+        মোবাইল: <input id="mobile" required>
+    </div>
+
+    <div class="row">
+        ই-মেইল: <input id="email">
+        ফেসবুক: <input id="facebook">
+    </div>
+
+    <div class="row">
+        বর্তমান ঠিকানা:
+        <textarea id="present" required></textarea>
+    </div>
+
+    <div class="row">
+        স্থায়ী ঠিকানা: গ্রাম/মহল্লা <input id="village" required>
+        ডাকঘর <input id="post" required>
+    </div>
+
+    <div class="row">
+        থানা <input id="thana" required>
+        জেলা <input id="district" required>
+    </div>
+
+    <div class="row">
+        স্বাক্ষর: <input id="sign" required class="motiur">
+        তারিখ: <input type="date" id="date" required>
+    </div>
+
+    <button onclick="submitData()">Submit</button>
+    <div id="msg" class="error"></div>
+
+</div>
+
+<!-- Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDi1R_E662VnaSZwbTQCT_eYhmDVDOkL9M",
+  authDomain: "online-bazaar-bd.firebaseapp.com",
+  projectId: "online-bazaar-bd",
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function submitData(){
+
+    // Required check
+    const requiredFields = [
+        "nameTop","signTop","dateTop","name","father","mother",
+        "className","group","roll","school","religion","mobile",
+        "present","village","post","thana","district","sign","date"
+    ];
+
+    for(let id of requiredFields){
+        if(document.getElementById(id).value.trim() === ""){
+            document.getElementById("msg").innerText = "সব বাধ্যতামূলক ঘর পূরণ করুন!";
+            return;
+        }
+    }
+
+    db.collection("forms").add({
+        nameTop: nameTop.value,
+        signTop: signTop.value,
+        dateTop: dateTop.value,
+
+        name: name.value,
+        father: father.value,
+        mother: mother.value,
+
+        className: className.value,
+        group: group.value,
+        roll: roll.value,
+
+        school: school.value,
+        religion: religion.value,
+        mobile: mobile.value,
+
+        email: email.value || "",
+        facebook: facebook.value || "",
+
+        present: present.value,
+
+        village: village.value,
+        post: post.value,
+        thana: thana.value,
+        district: district.value,
+
+        sign: sign.value,
+        date: date.value,
+
+        createdAt: new Date()
+    })
+    .then(()=>{
+        alert("✅ সফলভাবে সাবমিট হয়েছে!");
+        location.reload();
+    })
+    .catch(err=>{
+        document.getElementById("msg").innerText = "Error: " + err.message;
+    });
+}
+
+
+
+// Safe submit override (old function replace করবে auto)
+window.submitData = function(){
+
+    const get = (id) => document.getElementById(id)?.value || "";
+
+    const data = {
+        nameTop: get("nameTop"),
+        signTop: get("signTop"),
+        dateTop: get("dateTop"),
+
+        name: get("name"),
+        father: get("father"),
+        mother: get("mother"),
+
+        className: get("class"),
+        group: get("group"),
+        roll: get("roll"),
+
+        school: get("school"),
+        religion: get("religion"),
+        mobile: get("mobile"),
+
+        email: get("email"),
+        facebook: get("facebook"),
+
+        present: get("present"),
+
+        village: get("village"),
+        post: get("post"),
+        thana: get("thana"),
+        district: get("district"),
+
+        sign: get("sign"),
+        date: get("date"),
+
+        createdAt: new Date()
+    };
+
+    // অন্তত ১টা field filled কিনা check
+    let filled = false;
+    for(let key in data){
+        if(data[key].toString().trim() !== ""){
+            filled = true;
+            break;
+        }
+    }
+
+    if(!filled){
+        alert("⚠️ অন্তত একটি ঘর পূরণ করুন!");
+        return;
+    }
+
+    // Firebase save
+    db.collection("forms").add(data)
+    .then(()=>{
+        alert("✅ সফলভাবে সাবমিট হয়েছে!");
+    })
+    .catch(err=>{
+        alert("❌ Error: " + err.message);
+    });
+};
+</script>
+
+</body>
+</html>
